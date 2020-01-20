@@ -2,12 +2,17 @@ import React ,{useState  } from 'react'
 import {Container,Form , Row , Col , Button , Card}
  from 'react-bootstrap'
 
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 
 const SiteApplication = () =>{
+    const [startDate, setStartDate] = useState(new Date());
 
     const [dataCount,setDataCount ] = useState([{  id:1,
         date: 1 ,
+        time: "" ,
         dataOne:1,
         dataTwo: 1 ,
         dataThree: 1 ,
@@ -17,6 +22,7 @@ const SiteApplication = () =>{
     const [data , setData] = useState({  
         id:0,
         date: 1 ,
+        time: "" ,
         dataOne:1,
         dataTwo: 1 ,
         dataThree: 1 ,
@@ -24,10 +30,23 @@ const SiteApplication = () =>{
 
     
 
+        function minutes_with_leading_zeros(dt) 
+{ 
+  return (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+}
 
     const onAddClickHandler = (idData) =>
         {
-            setDataCount(curr => {return [...curr, {...data ,id: curr[curr.length-1].id + 1 } ] })
+            var d = new Date();
+            let today = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+            let hrs= d.getHours();
+            let minutes=minutes_with_leading_zeros(d); 
+         
+            setDataCount(curr => {return [...curr,
+                 {...data ,
+                    id: curr[curr.length-1].id + 1 , 
+                    date: today , 
+                    time: hrs+":"+minutes }  ]  })
         }
 
     const onDeleteclickHandler = (val) =>
@@ -44,9 +63,11 @@ const SiteApplication = () =>{
     return(
         <React.Fragment>
             <Container>
+            
               <Row  className="justify-content-md-center" >
                 <div style={{padding:20}}>
                     <h3>ENE SITE EXCEL APP</h3>
+                  
                 </div>
               </Row>
               <Row>
@@ -82,16 +103,50 @@ const SiteApplication = () =>{
                     <Col>
                       <Card>
                         <Form>
+                        <Row style={{margin:10}}>
+                        <Col  xs={1}>    
+                        </Col>
+                        <Col>
+                        <h4>Date</h4> 
+                        </Col>
+                        <Col>
+                        <h4>Time</h4>
+                        </Col>
+                        <Col>
+                        <h4>Data 1</h4> 
+                        </Col>
+                        <Col>
+                        <h4>  Data 2</h4> 
+                        </Col>
+                        <Col>
+                        <h4>Data 3</h4>
+                        </Col>
+                        <Col>
+                        <h4>Data 4</h4>
+                        </Col>
+                       
+                        <Col xs={1}>
+                       
+                        </Col>
+                        </Row>
                         {dataCount.map((count ,index , arr)  => (
                                 <Row  style={{margin:10}} key={count.id} >
                                 <Col xs={1}>
                                     { arr.length -1 === index ? <Button onClick={onAddClickHandler} variant="primary">+</Button>   : null }               
                                 </Col>
-                                    <Col xs={1}>
+                                    {/* <Col xs={1}>
                                             <Form.Label> {count.id}</Form.Label>
+                                    </Col> */}
+                                    <Col style={{padding:4}}>
+                                   
+                                      <DatePicker  style={{color:"red"}}
+                                        selected={startDate}
+                                        onChange={date => setStartDate(date)}
+                                        />
+                                        {/* <Form.Control value={count.date} onChange={()=>{}} placeholder="Date" /> */}
                                     </Col>
-                                    <Col xs={2}>
-                                        <Form.Control placeholder="Date" />
+                                    <Col >
+                                        <Form.Control value={count.time}  onChange={()=>{}} placeholder="Time" />
                                     </Col>
                                     <Col >
                                         <Form.Control placeholder="DATA 1" />
