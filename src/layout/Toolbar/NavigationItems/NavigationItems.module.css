@@ -1,0 +1,33 @@
+.NavigationItems {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    align-items: center;
+    flex-flow: column;
+
+}
+
+.NavigationItems li{
+    margin: 10px;
+}
+
+.NavigationItems li a{
+   text-decoration: none;
+   color: white;
+}
+
+.about{
+    
+ 
+ align-self: flex-end;
+  
+}
+
+
+@media (min-width:500px){
+    .NavigationItems{
+        flex-flow: row;
+    }
+}
