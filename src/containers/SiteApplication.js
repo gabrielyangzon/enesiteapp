@@ -104,14 +104,14 @@ const myTheme = {
      
     return(
         <React.Fragment>
-        <Container fluid="lg" style={{width:"100%"}}>
+        <Container fluid="xs" style={{width:"100%"}}>
             {/* <div style={{display:"flex" ,justifyContent:"center", flexDirection:"column" ,width:"80%"}}> */}
-              <Row className="justify-content-md-center">
+              <Row className="justify-content-xs-center">
                 <div style={{padding:20}}>
                     <h3>ENE SITE EXCEL APP</h3>
                 </div>
               </Row>
-              <Row  className="justify-content-md-center">
+              <Row  className="justify-content-xs-center">
                   <Col xs={1}>
               <Form.Group style={{marginRight:10}} controlId="exampleForm.ControlSelect1">
                     <Form.Label>Tag</Form.Label>
@@ -138,7 +138,7 @@ const myTheme = {
                 </Col>
 
               </Row>
-                <Row className="justify-content-lg-center">
+                <Row className="justify-content-xs-center">
                    
                       <Card>
                         <Form>
