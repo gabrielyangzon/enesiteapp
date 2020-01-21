@@ -38,7 +38,7 @@ const SiteApplication = () =>{
 
 
 
-    const [dataCount,setDataCount ] = useState([{ 
+    const [dataCount,setDataCount ] = useState([{
      id:1,
         date: new Date().toLocaleDateString("en-US") ,
         time: "" ,
@@ -177,16 +177,10 @@ const SiteApplication = () =>{
                         </Row> */}
                         {dataCount.map((count ,index , arr)  => (
                                 <Row style={{margin:10}} key={count.id} >
-                                <Col  xs={1} >
+                                <Col   >
                                     { arr.length -1 === index ? <Button onClick={onAddClickHandler} variant="primary">+</Button>   : null }
                                 </Col>
-                                    <Col xs={2}  style={{padding:6}}>
-
-                                      {/* <DatePicker
-                                        selected={count.date}
-                                        onChange={e => onChangeValueHandler("date",e , count.id , "date")}
-                                        className="inputData"
-                                        /> */}
+                                    <Col xs={1}  style={{padding:4}}>
 
                                         <NumPad.Calendar
                                             onChange={value => onChangeValueHandler("date",value , count.id )}
@@ -196,9 +190,8 @@ const SiteApplication = () =>{
                                             value={count.date}
                                         />
 
-
                                     </Col>
-                                    <Col xs={3}    style={{padding:6 }}>
+                                    <Col xs={1}    style={{padding:4 }}>
 
                                     <NumPad.DateTime
                                        onChange={e => onChangeValueHandler("time", e , count.id)}
@@ -210,45 +203,45 @@ const SiteApplication = () =>{
 
                                         {/* <Form.Control value={count.time} name="time" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="Time" /> */}
                                     </Col>
-                                    <Col xs={1}     style={{padding:4 }}>
-                                         {/* <NumPad.Number
+                                    <Col xs={2}     style={{padding:4 }}>
+                                         <NumPad.Number
                                                 onChange={e => onChangeValueHandler("dataOne",e , count.id)}
                                                 placeholder={'Data 1'}
                                                 value={count.dataOne}
                                                 decimal={3}
                                                 style={{width:"100"}}
 
-                                            /> */}
-                                        <Form.Control value={count.dataOne} name="dataOne" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 1" />
+                                            />
+                                        {/* <Form.Control value={count.dataOne} name="dataOne" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 1" /> */}
                                     </Col>
-                                    <Col xs={1}  style={{padding:4 }}>
-                                    {/* <NumPad.Number
+                                    <Col xs={2}  style={{padding:4 }}>
+                                    <NumPad.Number
                                                 onChange={e => onChangeValueHandler("dataTwo",e , count.id)}
                                                 placeholder={'Data 2'}
                                                 value={count.dataTwo}
                                                 decimal={3}
-                                            /> */}
-                                        <Form.Control value={count.dataTwo}  name="dataTwo" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 2" />
+                                            />
+                                        {/* <Form.Control value={count.dataTwo}  name="dataTwo" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 2" /> */}
                                     </Col >
-                                    <Col xs={1}   style={{padding:4}} >
-                                    {/* <NumPad.Number
+                                    <Col xs={2}   style={{padding:4}} >
+                                    <NumPad.Number
                                                 onChange={e => onChangeValueHandler("dataThree",e , count.id)}
                                                 placeholder={'Data 3'}
                                                 value={count.dataThree}
                                                 decimal={3}
-                                            /> */}
-                                        <Form.Control value={count.dataThree} name="dataThree" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 3" />
+                                            />
+                                        {/* <Form.Control value={count.dataThree} name="dataThree" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 3" /> */}
                                     </Col>
-                                    <Col xs={1}   style={{padding:4}} >
-                                    {/* <NumPad.Number
+                                    <Col xs={2}   style={{padding:4}} >
+                                    <NumPad.Number
                                                 onChange={e => onChangeValueHandler("dataFour",e , count.id)}
                                                 placeholder={'Data 4'}
                                                 value={count.dataFour}
                                                 decimal={3}
-                                            /> */}
-                                        <Form.Control value={count.dataFour} name="dataFour" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 4" />
+                                            />
+                                        {/* <Form.Control value={count.dataFour} name="dataFour" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 4" /> */}
                                     </Col>
-                                    <Col xs={1}  >
+                                    <Col   >
                                         <Button onClick={()=>onDeleteclickHandler(count.id)} variant="danger">-</Button>
                                   </Col>
                                 </Row>
