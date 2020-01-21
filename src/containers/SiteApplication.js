@@ -6,9 +6,23 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import "react-datepicker/dist/react-datepicker.css";
 
+import NumPad from 'react-numpad';
+
 
 const SiteApplication = () =>{
-    const [startDate, setStartDate] = useState(new Date());
+
+    
+const myTheme = {
+ 
+    body: {
+      primaryColor: '#263238',
+      secondaryColor: '#32a5f2',
+      highlightColor: '#FFC107',
+      backgroundColor: '#f9f9f9',
+      width:"20%"
+    },
+   
+  };
 
     const [dataCount,setDataCount ] = useState([{  id:1,
         date: new Date() ,
@@ -90,14 +104,15 @@ const SiteApplication = () =>{
      
     return(
         <React.Fragment>
-            <Container>
-            
-              <Row  className="justify-content-md-center" >
+        <Container fluid="lg" style={{width:"100%"}}>
+            {/* <div style={{display:"flex" ,justifyContent:"center", flexDirection:"column" ,width:"80%"}}> */}
+              <Row className="justify-content-md-center">
                 <div style={{padding:20}}>
                     <h3>ENE SITE EXCEL APP</h3>
                 </div>
               </Row>
-              <Row>
+              <Row  className="justify-content-md-center">
+                  <Col xs={1}>
               <Form.Group style={{marginRight:10}} controlId="exampleForm.ControlSelect1">
                     <Form.Label>Tag</Form.Label>
                     <Form.Control as="select">
@@ -108,7 +123,8 @@ const SiteApplication = () =>{
                     <option>Tag 5</option>
                     </Form.Control>
              </Form.Group>
-
+             </Col>
+             <Col xs={1}>
                 <Form.Group controlId="exampleForm.ControlSelect2">
                     <Form.Label>Name</Form.Label>
                     <Form.Control as="select">
@@ -119,83 +135,118 @@ const SiteApplication = () =>{
                     <option>Name 5</option>
                     </Form.Control>   
                 </Form.Group>
-
+                </Col>
 
               </Row>
-                <Row>
-                    <Col>
+                <Row className="justify-content-lg-center">
+                   
                       <Card>
                         <Form>
-                        <Row style={{margin:10}}>
-                        <Col  xs={1}>    
+                        {/* <Row style={{margin:10}}>
+                        <Col xs={1}>    
                         </Col>
-                        <Col  xs={2}>
+                        <Col  xs={1}>
                         <h4>Date</h4> 
                         </Col>
-                        <Col  xs={2}>
+                        <Col   xs={1}>
                         <h4>Time</h4>
                         </Col>
-                        <Col>
+                        <Col xs={1}>
                         <h4>Data 1</h4> 
                         </Col>
-                        <Col>
+                        <Col >
                         <h4>  Data 2</h4> 
                         </Col>
-                        <Col>
+                        <Col >
                         <h4>Data 3</h4>
                         </Col>
-                        <Col>
+                        <Col xs={6}>
                         <h4>Data 4</h4>
                         </Col>
                        
-                        <Col xs={1}>
-                       
-                        </Col>
-                        </Row>
+                        
+                        </Row> */}
                         {dataCount.map((count ,index , arr)  => (
                                 <Row style={{margin:10}} key={count.id} >
-                                <Col xs={1}>
+                                <Col xs="auto">
                                     { arr.length -1 === index ? <Button onClick={onAddClickHandler} variant="primary">+</Button>   : null }               
                                 </Col>
                                     {/* <Col xs={1}>
                                             <Form.Label> {count.id}</Form.Label>
                                     </Col> */}
-                                    <Col  style={{padding:4}}>
+                                    <Col xs="auto"  style={{padding:4}}>
                                    
                                       <DatePicker  
                                         selected={count.date}
                                         onChange={e => onChangeValueHandler("date",e , count.id , "date")}
-                                        />
+                                       
+                                        />       
+                                    </Col>
+                                    <Col  xs="auto" style={{padding:4 }}>
 
-                                        {/* <Form.Control value={count.date} onChange={()=>{}} placeholder="Date" /> */}
+                                    <NumPad.DateTime
+                                       onChange={e => onChangeValueHandler("time", e , count.id)}
+                                        dateFormat="HH:mm"
+                                        placeholder={'Time'}
+                                       value={count.time}
+                                       
+                                    />
+
+                                        {/* <Form.Control value={count.time} name="time" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="Time" /> */}
                                     </Col>
-                                    <Col >
-                                        <Form.Control value={count.time} name="time" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="Time" />
+                                    <Col  xs="auto" style={{padding:4 }}>
+                                        <NumPad.Number
+                                                onChange={e => onChangeValueHandler("dataOne",e , count.id)}       
+                                                placeholder={'Data 1'}
+                                                value={count.dataOne}
+                                                decimal={3}
+                                                
+                                            />
+                                        {/* <Form.Control value={count.dataOne} name="dataOne" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 1" /> */}
                                     </Col>
-                                    <Col >
-                                        <Form.Control value={count.dataOne} name="dataOne" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 1" />
-                                    </Col>
-                                    <Col>
-                                        <Form.Control value={count.dataTwo}  name="dataTwo" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 2" />
+                                    <Col  xs="auto" style={{padding:4}}>
+                                    <NumPad.Number
+                                                onChange={e => onChangeValueHandler("dataTwo",e , count.id)}
+                                                placeholder={'Data 2'}
+                                                value={count.dataTwo}
+                                                decimal={3}
+                                            />
+                                        {/* <Form.Control value={count.dataTwo}  name="dataTwo" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 2" /> */}
                                     </Col >
-                                    <Col  >
-                                        <Form.Control value={count.dataThree} name="dataThree" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 3" />
+                                    <Col  xs="auto" style={{padding:4}} >
+                                    <NumPad.Number
+                                                onChange={e => onChangeValueHandler("dataThree",e , count.id)}
+                                                placeholder={'Data 3'}
+                                                value={count.dataThree}
+                                                decimal={3}
+                                            />
+                                        {/* <Form.Control value={count.dataThree} name="dataThree" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 3" /> */}
                                     </Col>
-                                    <Col >
-                                        <Form.Control value={count.dataFour} name="dataFour" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 4" />
+                                    <Col  xs="auto" style={{padding:4}} >
+                                    <NumPad.Number
+                                                onChange={e => onChangeValueHandler("dataFour",e , count.id)}
+                                                placeholder={'Data 4'}
+                                                value={count.dataFour}
+                                                decimal={3}
+                                            />
+                                        {/* <Form.Control value={count.dataFour} name="dataFour" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 4" /> */}
                                     </Col>
-                                    <Col xs={1}>
+                                    <Col xs="auto">
                                         <Button onClick={()=>onDeleteclickHandler(count.id)} variant="danger">-</Button>
                                   </Col>
                                 </Row>
                                 ))}
                         </Form> 
                   </Card>
-                </Col>
+               
               </Row>
-        </Container>
+              </Container>
     </React.Fragment>
     );
 }
+
+
+
+
 
 export default SiteApplication;
