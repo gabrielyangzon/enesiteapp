@@ -2,9 +2,7 @@ import React ,{useState, useEffect  } from 'react'
 import {Container,Form , Row , Col , Button , Card}
  from 'react-bootstrap'
 
-import DatePicker from 'react-datepicker'
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-import "react-datepicker/dist/react-datepicker.css";
+import Charts from './Charts'
 
 import NumPad from 'react-numpad';
 import './SiteApplication.css'
@@ -34,11 +32,7 @@ const SiteApplication = () =>{
        },
 ]
 
-
-
-
-
-    const [dataCount,setDataCount ] = useState([{
+   const [dataCount,setDataCount ] = useState([{
      id:1,
         date: new Date().toLocaleDateString("en-US") ,
         time: "" ,
@@ -148,7 +142,6 @@ const SiteApplication = () =>{
 
               </Row>
                 <Row  >
-
                       <Card>
                         <Form>
                         {/* <Row style={{margin:10}}>
@@ -249,6 +242,9 @@ const SiteApplication = () =>{
                         </Form>
                   </Card>
 
+              </Row>
+              <Row style={{marginTop:20}}>
+                <Charts data={dataCount}/>
               </Row>
               </Container>
     </React.Fragment>
