@@ -1,4 +1,4 @@
-import React ,{useState  } from 'react'
+import React ,{useState, useEffect  } from 'react'
 import {Container,Form , Row , Col , Button , Card}
  from 'react-bootstrap'
 
@@ -11,29 +11,31 @@ const SiteApplication = () =>{
     const [startDate, setStartDate] = useState(new Date());
 
     const [dataCount,setDataCount ] = useState([{  id:1,
-        date: 1 ,
+        date: new Date() ,
         time: "" ,
-        dataOne:1,
-        dataTwo: 1 ,
-        dataThree: 1 ,
-        dataFour: 1 , }
+        dataOne:"",
+        dataTwo: "" ,
+        dataThree: "" ,
+        dataFour: "", }
     ])
 
     const [data , setData] = useState({  
         id:0,
-        date: 1 ,
+        date: new Date() ,
         time: "" ,
-        dataOne:1,
-        dataTwo: 1 ,
-        dataThree: 1 ,
-        dataFour: 1 , })
+        dataOne:"",
+        dataTwo: "" ,
+        dataThree: "" ,
+        dataFour: "", })
 
-    
+    const[newDataFromUser, setNewDataFromUser] = useState({})
 
-        function minutes_with_leading_zeros(dt) 
-{ 
-  return (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
-}
+    const[changed, setChanged] = useState(true)
+
+    function minutes_with_leading_zeros(dt) 
+    { 
+        return (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
+    }
 
     const onAddClickHandler = (idData) =>
         {
@@ -45,7 +47,7 @@ const SiteApplication = () =>{
             setDataCount(curr => {return [...curr,
                  {...data ,
                     id: curr[curr.length-1].id + 1 , 
-                    date: today , 
+                    date: d  , 
                     time: hrs+":"+minutes }  ]  })
         }
 
@@ -58,6 +60,32 @@ const SiteApplication = () =>{
             setDataCount(newData);
         }
 
+    
+    const onChangeValueHandler = ( name,value ,id ) =>{
+
+        const dataToBeMofied= dataCount.find(x => x.id===id);
+         
+        const newData =   {...dataToBeMofied ,  [name] : value} 
+              
+         dataCount[dataCount.findIndex(x => x.id===id)] = newData;
+
+         const newArrayData = dataCount;
+
+         setNewDataFromUser(newArrayData);
+
+         setChanged(!changed);
+    }
+
+    
+
+    useEffect(()=>
+    {
+        if(Object.keys(newDataFromUser).length !== 0)
+        {
+             setDataCount(newDataFromUser)
+        }
+       
+    },[changed])
 
      
     return(
@@ -67,7 +95,6 @@ const SiteApplication = () =>{
               <Row  className="justify-content-md-center" >
                 <div style={{padding:20}}>
                     <h3>ENE SITE EXCEL APP</h3>
-                  
                 </div>
               </Row>
               <Row>
@@ -80,9 +107,7 @@ const SiteApplication = () =>{
                     <option>Tag 4</option>
                     <option>Tag 5</option>
                     </Form.Control>
-
-                 
-                </Form.Group>
+             </Form.Group>
 
                 <Form.Group controlId="exampleForm.ControlSelect2">
                     <Form.Label>Name</Form.Label>
@@ -92,9 +117,7 @@ const SiteApplication = () =>{
                     <option>Name 3</option>
                     <option>Name 4</option>
                     <option>Name 5</option>
-                    </Form.Control>
-
-                 
+                    </Form.Control>   
                 </Form.Group>
 
 
@@ -106,10 +129,10 @@ const SiteApplication = () =>{
                         <Row style={{margin:10}}>
                         <Col  xs={1}>    
                         </Col>
-                        <Col>
+                        <Col  xs={2}>
                         <h4>Date</h4> 
                         </Col>
-                        <Col>
+                        <Col  xs={2}>
                         <h4>Time</h4>
                         </Col>
                         <Col>
@@ -130,35 +153,36 @@ const SiteApplication = () =>{
                         </Col>
                         </Row>
                         {dataCount.map((count ,index , arr)  => (
-                                <Row  style={{margin:10}} key={count.id} >
+                                <Row style={{margin:10}} key={count.id} >
                                 <Col xs={1}>
                                     { arr.length -1 === index ? <Button onClick={onAddClickHandler} variant="primary">+</Button>   : null }               
                                 </Col>
                                     {/* <Col xs={1}>
                                             <Form.Label> {count.id}</Form.Label>
                                     </Col> */}
-                                    <Col style={{padding:4}}>
+                                    <Col  style={{padding:4}}>
                                    
-                                      <DatePicker  style={{color:"red"}}
-                                        selected={startDate}
-                                        onChange={date => setStartDate(date)}
+                                      <DatePicker  
+                                        selected={count.date}
+                                        onChange={e => onChangeValueHandler("date",e , count.id , "date")}
                                         />
+
                                         {/* <Form.Control value={count.date} onChange={()=>{}} placeholder="Date" /> */}
                                     </Col>
                                     <Col >
-                                        <Form.Control value={count.time}  onChange={()=>{}} placeholder="Time" />
+                                        <Form.Control value={count.time} name="time" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="Time" />
                                     </Col>
                                     <Col >
-                                        <Form.Control placeholder="DATA 1" />
+                                        <Form.Control value={count.dataOne} name="dataOne" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 1" />
                                     </Col>
                                     <Col>
-                                        <Form.Control placeholder="DATA 2" />
+                                        <Form.Control value={count.dataTwo}  name="dataTwo" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 2" />
                                     </Col >
                                     <Col  >
-                                        <Form.Control placeholder="DATA 3" />
+                                        <Form.Control value={count.dataThree} name="dataThree" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 3" />
                                     </Col>
                                     <Col >
-                                        <Form.Control placeholder="DATA 4" />
+                                        <Form.Control value={count.dataFour} name="dataFour" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 4" />
                                     </Col>
                                     <Col xs={1}>
                                         <Button onClick={()=>onDeleteclickHandler(count.id)} variant="danger">-</Button>
