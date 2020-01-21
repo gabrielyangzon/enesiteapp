@@ -10,8 +10,37 @@ import NumPad from 'react-numpad';
 import './SiteApplication.css'
 
 const SiteApplication = () =>{
-    const [dataCount,setDataCount ] = useState([{  id:1,
-        date: new Date() ,
+
+   const tagData = [
+       {
+          tagname : '21P01-A',
+          nameList:['A-工水受入ポンプ' , 'test1-21P01-A' , 'test2-21P01-A' ]
+       },
+       {
+        tagname : '21P01-B',
+        nameList:['B-工水受入ポンプ' , 'test1-21P01-B' , 'test2-21P01-B']
+       },
+       {
+        tagname : '21P02-A',
+        nameList:['A-工水補給水ポンプ' , 'test1-21P02' , 'test2-21P02'  ]
+       },
+       {
+        tagname : '21P02-B',
+        nameList:['B-工水補給水ポンプ' , 'test1-21P02-B' , 'test2-21P02-B' ]
+       },
+       {
+        tagname : '21P03',
+        nameList:['散水ポンプ' , 'test1-21P03' , 'test2-21P03']
+       },
+]
+
+
+
+
+
+    const [dataCount,setDataCount ] = useState([{ 
+     id:1,
+        date: new Date().toLocaleDateString("en-US") ,
         time: "" ,
         dataOne:"",
         dataTwo: "" ,
@@ -20,7 +49,7 @@ const SiteApplication = () =>{
     ])
     const [data , setData] = useState({
         id:0,
-        date: new Date() ,
+        date: new Date().toLocaleDateString("en-US") ,
         time: "" ,
         dataOne:"",
         dataTwo: "" ,
@@ -46,7 +75,7 @@ const SiteApplication = () =>{
             setDataCount(curr => {return [...curr,
                  {...data ,
                     id: curr[curr.length-1].id + 1 ,
-                    date: d  ,
+                    date: new Date().toLocaleDateString("en-US")  ,
                     time: hrs+":"+minutes }  ]  })
         }
 
@@ -99,11 +128,9 @@ const SiteApplication = () =>{
               <Form.Group style={{marginRight:10}} controlId="exampleForm.ControlSelect1">
                     <Form.Label>Tag</Form.Label>
                     <Form.Control as="select">
-                    <option>Tag 1</option>
-                    <option>Tag 2</option>
-                    <option>Tag 3</option>
-                    <option>Tag 4</option>
-                    <option>Tag 5</option>
+                     {tagData.map(x => (<option key={x.tagname}>{x.tagname}</option> ))}
+
+
                     </Form.Control>
              </Form.Group>
 
@@ -120,7 +147,7 @@ const SiteApplication = () =>{
 
 
               </Row>
-                <Row  className="justify-content-lg-center">
+                <Row  >
 
                       <Card>
                         <Form>
@@ -153,13 +180,23 @@ const SiteApplication = () =>{
                                 <Col  xs={1} >
                                     { arr.length -1 === index ? <Button onClick={onAddClickHandler} variant="primary">+</Button>   : null }
                                 </Col>
-                                    <Col xs={1}  style={{padding:6}}>
+                                    <Col xs={2}  style={{padding:6}}>
 
-                                      <DatePicker
+                                      {/* <DatePicker
                                         selected={count.date}
                                         onChange={e => onChangeValueHandler("date",e , count.id , "date")}
                                         className="inputData"
+                                        /> */}
+
+                                        <NumPad.Calendar
+                                            onChange={value => onChangeValueHandler("date",value , count.id )}
+                                            dateFormat="MM.DD.YYYY"
+                                            min="01.01.1900"
+                                            markers={['01.03.2018', '06.03.2018']}
+                                            value={count.date}
                                         />
+
+
                                     </Col>
                                     <Col xs={3}    style={{padding:6 }}>
 
@@ -179,7 +216,7 @@ const SiteApplication = () =>{
                                                 placeholder={'Data 1'}
                                                 value={count.dataOne}
                                                 decimal={3}
-                                                style={{width:"100"}} 
+                                                style={{width:"100"}}
 
                                             /> */}
                                         <Form.Control value={count.dataOne} name="dataOne" onChange={e => onChangeValueHandler(e.target.name, e.target.value , count.id)} placeholder="DATA 1" />
