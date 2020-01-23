@@ -201,7 +201,10 @@ const SiteApplication = () =>{
                                 </Row>
 
                                 <Row>
+                                    
                                     <Col>
+                                    <Form>
+                                    <Form.Group>
                         {dataCount.map((count ,index , arr)  => (
                                 <Row style={{margin:5}} key={count.id} >
                                         <Col >
@@ -214,9 +217,9 @@ const SiteApplication = () =>{
                                                     min="01.01.1900"
                                                     markers={['01.03.2018', '06.03.2018']}
                                                     value={count.date}>
-                                                   <Form.Group>
+                                                   
                                                     <Form.Control style={{  width:120}}  value={count.date}  placeholder="DATE"  />
-                                                    </Form.Group>
+                                                    
                                                 </NumPad.Calendar>
                                         </Col>
 
@@ -228,9 +231,9 @@ const SiteApplication = () =>{
                                                 dateFormat="HH:mm"
                                                 placeholder={'Time'}
                                                 value={count.time}>
-                                                    <Form.Group>
+                                                
                                                         <Form.Control style={{ width:100}}  value={count.time}  placeholder="TIME"  />
-                                                   </Form.Group>
+                                                   
                                             </NumPad.DateTime>
 
                                         </Col>
@@ -242,9 +245,9 @@ const SiteApplication = () =>{
                                                         placeholder={'Data 1'}
                                                         value={count.dataOne}
                                                         decimal={3}>
-                                                        <Form.Group>
+                                                       
                                                              <Form.Control style={{width:100}}  value={count.dataOne}  placeholder="DATA 1"  />
-                                                        </Form.Group>
+                                                    
                                                 </NumPad.Number>
 
                                         </Col>
@@ -256,9 +259,9 @@ const SiteApplication = () =>{
                                                                 placeholder={'Data 2'}
                                                                 value={count.dataTwo}
                                                                 decimal={3}>
-                                                             <Form.Group>
+                                                            
                                                                 <Form.Control style={{width:100}}  value={count.dataTwo}  placeholder="DATA 2"  />
-                                                             </Form.Group>
+                                                           
                                                         </NumPad.Number>
                                             </Col>
 
@@ -269,9 +272,9 @@ const SiteApplication = () =>{
                                                         placeholder={'Data 3'}
                                                         value={count.dataThree}
                                                         decimal={3}>
-                                                        <Form.Group>
+                                                       
                                                             <Form.Control style={{width:100}}  value={count.dataThree}  placeholder="DATA 3"  />
-                                                        </Form.Group>
+                                                        
                                                 </NumPad.Number>
                                             </Col>
 
@@ -281,25 +284,27 @@ const SiteApplication = () =>{
                                                             onChange={e => onChangeValueHandler("dataFour",e , count.id)}
                                                             value={count.dataFour}
                                                             decimal={3}>
-                                                        <Form.Group>
+                                                       
                                                             <Form.Control style={{width:100}}  value={count.dataFour}  placeholder="DATA 4"  />
-                                                        </Form.Group>
+                                                       
                                                 </NumPad.Number>
                                             </Col>
 
 
                                             <Col >
-                                                 <Form.Group>
+                                                
                                                       { arr.length -1 !== 0 ?  <Button onClick={ ()=> onDelete(count.id)}  variant="danger">-</Button>  : <Col>
-
-</Col>}
-                                                </Form.Group>
+                                            </Col>}
+                                               
                                             </Col>
 
                                 </Row>
 
                              ))}
+                             </Form.Group>
+                              </Form>
                                </Col>
+                              
                              </Row>
                         </Card>
 
