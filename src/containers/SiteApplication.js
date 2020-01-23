@@ -139,10 +139,10 @@ const SiteApplication = () =>{
                     SUMITOMO
                 </Navbar.Brand>
             </Navbar>
-        <Container  style={{marginTop:80}}>
+        <Container style={{marginTop:60}}>
               <Row  >
                  
-                    <Form.Group style={{marginRight:10}} controlId="exampleForm.ControlSelect1">
+                    <Form.Group style={{marginRight:5}} controlId="exampleForm.ControlSelect1">
 
                         <Col>
                         <Form.Label>Select Tag</Form.Label>
@@ -174,27 +174,27 @@ const SiteApplication = () =>{
               </Row>
 
                             <Card>
-                                <Row style={{margin:10}}>
+                                <Row style={{margin:5}}>
                                         <Col>
 
                                         </Col>
                                         <Col  >
-                                        <h4>Date</h4>
+                                        <h5>Date</h5>
                                         </Col>
                                         <Col  >
-                                        <h4>Time</h4>
+                                        <h5>Time</h5>
                                         </Col>
                                         <Col>
-                                        <h4>Data 1</h4>
+                                        <h5>Data 1</h5>
                                         </Col>
                                         <Col >
-                                        <h4>  Data 2</h4>
+                                        <h5>  Data 2</h5>
                                         </Col>
                                         <Col >
-                                        <h4>Data 3</h4>
+                                        <h5>Data 3</h5>
                                         </Col>
                                         <Col>
-                                        <h4>Data 4</h4>
+                                        <h5>Data 4</h5>
                                         </Col>
                                         <Col>
                                         </Col>
@@ -203,9 +203,9 @@ const SiteApplication = () =>{
                                 <Row>
                                     <Col>
                         {dataCount.map((count ,index , arr)  => (
-                                <Row style={{margin:10}} key={count.id} >
+                                <Row style={{margin:5}} key={count.id} >
                                         <Col >
-                                            { arr.length -1 === index ? <Button onClick={onAddClickHandler} variant="primary">+</Button>   : null }
+                                            { arr.length -1 === index ? <Button onClick={onAddClickHandler} variant="primary">+</Button>   : <Col></Col> }
                                         </Col>
                                         <Col>
                                                 <NumPad.Calendar
@@ -290,7 +290,9 @@ const SiteApplication = () =>{
 
                                             <Col >
                                                  <Form.Group>
-                                                      { arr.length -1 !== 0 ?  <Button onClick={ ()=> onDelete(count.id)}  variant="danger">-</Button>  : null}
+                                                      { arr.length -1 !== 0 ?  <Button onClick={ ()=> onDelete(count.id)}  variant="danger">-</Button>  : <Col>
+
+</Col>}
                                                 </Form.Group>
                                             </Col>
 

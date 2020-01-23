@@ -17,7 +17,7 @@ const Charts = (props) => {
     return(
         <React.Fragment>
             <IgrCategoryChart  dataSource={props.data}
-                   width="1000px"
+                   width="100%"
                    height="500px"
                   
                    chartTitle="Temperature"
