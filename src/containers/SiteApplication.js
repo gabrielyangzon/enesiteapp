@@ -1,14 +1,16 @@
 import React ,{useState, useEffect  } from 'react'
-import {Container,Form , Row , Col , Button , Card , Navbar}
- from 'react-bootstrap'
+import {Container,Form , Row , Col , Button , Card , Navbar , Modal} from 'react-bootstrap'
 
- import logo from '../content/logo.jpg'
+
 import Charts from './Charts'
 
 import NumPad from 'react-numpad';
 import './SiteApplication.css'
 
 const SiteApplication = () =>{
+
+    const [selectedId , setSelectedId] = useState();
+    const [selectedData , setSelectedData] = useState();
 
    const tagData = [
        {
@@ -60,10 +62,12 @@ const SiteApplication = () =>{
         return (dt.getMinutes() < 10 ? '0' : '') + dt.getMinutes();
     }
 
+    const [modalShow, setModalShow] = React.useState(false);
+
     const onAddClickHandler = (idData) =>
         {
             var d = new Date();
-            let today = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+            
             let hrs= d.getHours();
             let minutes=minutes_with_leading_zeros(d);
 
@@ -74,9 +78,9 @@ const SiteApplication = () =>{
                     time: hrs+":"+minutes }  ]  })
         }
 
-    const onDeleteclickHandler = (val) =>
+    const onDeleteclickHandler = () =>
         {
-            const i = dataCount.findIndex(x => x.id===val);
+            const i = dataCount.findIndex(x => x.id===selectedId);
 
             const newData = dataCount.slice(0,i).concat(dataCount.slice(i+1,dataCount.length));
 
@@ -108,39 +112,64 @@ const SiteApplication = () =>{
 
     },[changed])
 
+    
+    const modalYesClickHandler = () =>{
+            setModalShow(false)
+            onDeleteclickHandler();
+    }
+
+    const modalNoClickHandler = () =>{
+        setModalShow(false)
+}
+
+
+    const onDelete = (id) =>{
+        setSelectedId(id)
+        const dataToBeDeleted = dataCount.find(x => x.id===id)
+        setSelectedData(dataToBeDeleted)
+
+        setModalShow(true)
+       
+    }
 
     return(
         <React.Fragment>
-            <Navbar fixed="top"  bg="primary" variant="dark">
-                <Navbar.Brand className="justify-content-xs-center">   
+            <Navbar className="justify-content-xs-center" fixed="top"  bg="primary" variant="dark">
+                <Navbar.Brand >   
                     SUMITOMO
                 </Navbar.Brand>
             </Navbar>
-        <Container style={{marginTop:30}}>
+        <Container  style={{marginTop:80}}>
+              <Row  >
+                 
+                    <Form.Group style={{marginRight:10}} controlId="exampleForm.ControlSelect1">
 
-
-              <Row  className="justify-content-xs-center">
-
-              <Form.Group style={{marginRight:10}} controlId="exampleForm.ControlSelect1">
-                    <Form.Label>Tag</Form.Label>
-                    <Form.Control as="select">
-                     {tagData.map(x => (<option key={x.tagname}>{x.tagname}</option> ))}
-
-
-                    </Form.Control>
-             </Form.Group>
-
-                <Form.Group controlId="exampleForm.ControlSelect2">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control as="select">
-                    <option>Name 1</option>
-                    <option>Name 2</option>
-                    <option>Name 3</option>
-                    <option>Name 4</option>
-                    <option>Name 5</option>
-                    </Form.Control>
-                </Form.Group>
-
+                        <Col>
+                        <Form.Label>Select Tag</Form.Label>
+                        </Col>
+                        <Col>
+                            <Form.Control as="select">
+                            {tagData.map(x => (<option key={x.tagname}>{x.tagname}</option> ))}
+                        </Form.Control>
+                        </Col>
+                    </Form.Group>
+                
+                
+                    <Form.Group controlId="exampleForm.ControlSelect2">
+                         <Col>
+                             <Form.Label>Select Name</Form.Label>
+                        </Col>
+                        <Col>
+                        <Form.Control as="select">
+                        <option>Name 1</option>
+                        <option>Name 2</option>
+                        <option>Name 3</option>
+                        <option>Name 4</option>
+                        <option>Name 5</option>
+                        </Form.Control>
+                        </Col>
+                    </Form.Group>
+                   
 
               </Row>
 
@@ -178,7 +207,7 @@ const SiteApplication = () =>{
                                         <Col >
                                             { arr.length -1 === index ? <Button onClick={onAddClickHandler} variant="primary">+</Button>   : null }
                                         </Col>
-                                        <Col  >
+                                        <Col>
                                                 <NumPad.Calendar
                                                     onChange={value => onChangeValueHandler("date",value , count.id )}
                                                     dateFormat="MM.DD.YYYY"
@@ -261,7 +290,7 @@ const SiteApplication = () =>{
 
                                             <Col >
                                                  <Form.Group>
-                                                    <Button onClick={()=>onDeleteclickHandler(count.id)} variant="danger">-</Button>
+                                                      { arr.length -1 !== 0 ?  <Button onClick={ ()=> onDelete(count.id)}  variant="danger">-</Button>  : null}
                                                 </Form.Group>
                                             </Col>
 
@@ -277,11 +306,56 @@ const SiteApplication = () =>{
                 <Charts data={dataCount}/>
               </Row>
               </Container>
+
+              <MyVerticallyCenteredModal
+                    dataToBeDeleted={selectedData }
+                    show={modalShow}
+                    onYes={modalYesClickHandler}
+                    onNo={modalNoClickHandler}
+/>
     </React.Fragment>
+
+
+
     );
 }
 
 
+
+function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+      {...props}
+        size="sm"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+           Delete 
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        
+          <p>
+            Are you sure you want to delete this item?
+          </p>
+          {props.dataToBeDeleted ? 
+          <div>
+          <p><b>Date:</b> {props.dataToBeDeleted.date}</p>
+          <p><b>Time:</b>{props.dataToBeDeleted.time}</p>
+          <p><b>Data 1:</b>{props.dataToBeDeleted.dataOne ? props.dataToBeDeleted.dataOne : 0} <b>Data 2:</b> {props.dataToBeDeleted.dataTwo ? props.dataToBeDeleted.dataTwo : 0 }</p>
+          <p><b>Data 3:</b>{props.dataToBeDeleted.dataThree ? props.dataToBeDeleted.dateThree : 0 } <b>Data 4:</b> {props.dataToBeDeleted.dataFour ? props.dataToBeDeleted.dataFour : 0 }</p>
+          </div>   : <p></p> }
+        </Modal.Body>
+        <Modal.Footer className="justify-content-center"> 
+                         <Button style={{margin:30}}variant="danger" size="lg" onClick={props.onYes}>Yes</Button>
+                
+                        <Button style={{margin:30}} variant="secondary" size="lg" onClick={props.onNo}>No</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
 
 
