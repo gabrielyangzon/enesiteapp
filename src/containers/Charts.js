@@ -1,5 +1,5 @@
 import React from 'react'
-import { IgrCategoryChartModule ,IgrCategoryChart  } from 'igniteui-react-charts';
+import { IgrCategoryChartModule ,IgrCategoryChart , IgrCategoryXAxis ,IgrNumericYAxis, IgrDataChart } from 'igniteui-react-charts';
 IgrCategoryChartModule .register();
 
 
@@ -11,12 +11,22 @@ let data = [
     { "CountryName": "Brazil", "Pop1995": 161, "Pop2005": 186, "Pop2015": 204, "Pop2025": 218 }
    ];
 
+
+
 const Charts = (props) => {
     return(
         <React.Fragment>
             <IgrCategoryChart  dataSource={props.data}
                    width="1000px"
-                   height="500px" />
+                   height="500px"
+                  
+                   chartTitle="Temperature"
+                  
+                   >
+
+                        <IgrCategoryXAxis name="xAxis" label="Country" />
+                        <IgrNumericYAxis name="yAxis" minimumValue={0} />
+                        </IgrCategoryChart>
         </React.Fragment>
     )
 }
