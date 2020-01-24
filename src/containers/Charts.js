@@ -5,13 +5,13 @@ import ReactApexChart from "react-apexcharts";
 
 
 
-  
 
 
 
-    
+
+
 const Charts = (props) => {
-  
+
 
     const chartY = props.data.map(y => y.time)
     console.log(chartY)
@@ -25,9 +25,9 @@ const Charts = (props) => {
             {
                  name:"Data-1",
                  data: props.data.map(d=>d.dataOne )
-            }, 
+            },
             {
-                
+
                 name:"Data-2",
                  data: props.data.map(d=>d.dataTwo )
             },
@@ -38,24 +38,31 @@ const Charts = (props) => {
             {
                 name:"Data-4",
                 data: props.data.map(d=>d.dataFour )
-            } 
+            }
         ],
                 options: {
                     chart: {
                     type: 'bar',
-                    height: 430
+                    height: 430,
+
                     },
                     plotOptions: {
                     bar: {
                         horizontal: true,
                         dataLabels: {
                         position: 'top',
+
                         },
                     }
                     },
-                    dataLabels: { 
+                    dataLabels: {
                     enabled: true,
-                    offsetX: -6,
+
+                    formatter: function(val) {
+                        return  val + "°"
+                    },
+
+                    // offsetX: 20,
                     style: {
                         fontSize: '12px',
                         colors: ['#fff']
@@ -67,9 +74,18 @@ const Charts = (props) => {
                     colors: ['#fff']
                     },
                     xaxis: {
+                        title: {
+                            text: 'Temperature(°)',
+                          },
 
-                    categories: props.data.map(y => y.time),
+                    categories: props.data.map(y => y.date + "-" + y.time),
                     },
+                    yaxis:{
+                        title: {
+                            text: "Date-Time",
+                          }
+                    }
+
                 }
        }
 
@@ -80,7 +96,7 @@ const Charts = (props) => {
 
     return(
         <React.Fragment>
-         
+
 
 
             <ReactApexChart options={chartSettings.options} series={chartSettings.temperature} type="bar" height={430} />
