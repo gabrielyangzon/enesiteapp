@@ -9,6 +9,11 @@ import './SiteApplication.css'
 
 const SiteApplication = () =>{
 
+    function GetTime () {
+        var d = new Date();
+       
+        return d.getHours() + ":" + minutes_with_leading_zeros(d) + ":" + d.getSeconds();
+    }
     const [selectedId , setSelectedId] = useState();
     const [selectedData , setSelectedData] = useState();
 
@@ -36,9 +41,9 @@ const SiteApplication = () =>{
 ]
 
    const [dataCount,setDataCount ] = useState([{
-     id:1,
+        id:1,
         date: new Date().toLocaleDateString("en-US") ,
-        time: "" ,
+        time:GetTime() ,
         dataOne:"",
         dataTwo: "" ,
         dataThree: "" ,
@@ -66,16 +71,11 @@ const SiteApplication = () =>{
 
     const onAddClickHandler = (idData) =>
         {
-            var d = new Date();
-            
-            let hrs= d.getHours();
-            let minutes=minutes_with_leading_zeros(d);
-
             setDataCount(curr => {return [...curr,
                  {...data ,
                     id: curr[curr.length-1].id + 1 ,
                     date: new Date().toLocaleDateString("en-US")  ,
-                    time: hrs+":"+minutes }  ]  })
+                    time: GetTime()}  ]  })
         }
 
     const onDeleteclickHandler = () =>
@@ -185,16 +185,16 @@ const SiteApplication = () =>{
                                         <h5>Time</h5>
                                         </Col>
                                         <Col>
-                                        <h5>Data 1</h5>
+                                        <h5>Data-1</h5>
                                         </Col>
                                         <Col >
-                                        <h5>  Data 2</h5>
+                                        <h5>  Data-2</h5>
                                         </Col>
                                         <Col >
-                                        <h5>Data 3</h5>
+                                        <h5>Data-3</h5>
                                         </Col>
                                         <Col>
-                                        <h5>Data 4</h5>
+                                        <h5>Data-4</h5>
                                         </Col>
                                         <Col>
                                         </Col>
@@ -228,7 +228,7 @@ const SiteApplication = () =>{
 
                                             <NumPad.DateTime
                                             onChange={e => onChangeValueHandler("time", e , count.id)}
-                                                dateFormat="HH:mm"
+                                                dateFormat="HH:mm:ss"
                                                 placeholder={'Time'}
                                                 value={count.time}>
                                                 

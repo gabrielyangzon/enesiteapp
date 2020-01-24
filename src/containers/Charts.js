@@ -1,32 +1,90 @@
 import React from 'react'
-import { IgrCategoryChartModule ,IgrCategoryChart , IgrCategoryXAxis ,IgrNumericYAxis, IgrDataChart } from 'igniteui-react-charts';
-IgrCategoryChartModule .register();
 
 
-let data = [
-    { "CountryName": "China", "Pop1995": 1216, "Pop2005": 1297, "Pop2015": 1361, "Pop2025": 1394 },
-    { "CountryName": "India", "Pop1995": 920, "Pop2005": 1090, "Pop2015": 1251, "Pop2025": 1396 },
-    { "CountryName": "United States", "Pop1995": 266, "Pop2005": 295, "Pop2015": 322, "Pop2025": 351 },
-    { "CountryName": "Indonesia", "Pop1995": 197, "Pop2005": 229, "Pop2015": 256, "Pop2025": 277 },
-    { "CountryName": "Brazil", "Pop1995": 161, "Pop2005": 186, "Pop2015": 204, "Pop2025": 218 }
-   ];
+import ReactApexChart from "react-apexcharts";
 
 
 
+  
+
+
+
+    
 const Charts = (props) => {
+  
+
+    const chartY = props.data.map(y => y.time)
+    console.log(chartY)
+
+
+
+
+    const chartSettings = {
+
+        temperature: [
+            {
+                 name:"Data-1",
+                 data: props.data.map(d=>d.dataOne )
+            }, 
+            {
+                
+                name:"Data-2",
+                 data: props.data.map(d=>d.dataTwo )
+            },
+            {
+                name:"Data-3",
+                data: props.data.map(d=>d.dataThree )
+            } ,
+            {
+                name:"Data-4",
+                data: props.data.map(d=>d.dataFour )
+            } 
+        ],
+                options: {
+                    chart: {
+                    type: 'bar',
+                    height: 430
+                    },
+                    plotOptions: {
+                    bar: {
+                        horizontal: true,
+                        dataLabels: {
+                        position: 'top',
+                        },
+                    }
+                    },
+                    dataLabels: { 
+                    enabled: true,
+                    offsetX: -6,
+                    style: {
+                        fontSize: '12px',
+                        colors: ['#fff']
+                    }
+                    },
+                    stroke: {
+                    show: true,
+                    width: 1,
+                    colors: ['#fff']
+                    },
+                    xaxis: {
+
+                    categories: props.data.map(y => y.time),
+                    },
+                }
+       }
+
+
+
+
+
+
     return(
         <React.Fragment>
-            <IgrCategoryChart  dataSource={props.data}
-                   width="100%"
-                   height="500px"
-                  
-                   chartTitle="Temperature"
-                  
-                   >
+         
 
-                        <IgrCategoryXAxis name="xAxis" label="Country" />
-                        <IgrNumericYAxis name="yAxis" minimumValue={0} />
-                        </IgrCategoryChart>
+
+            <ReactApexChart options={chartSettings.options} series={chartSettings.temperature} type="bar" height={430} />
+
         </React.Fragment>
     )
 }
