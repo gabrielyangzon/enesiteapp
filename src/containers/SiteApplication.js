@@ -139,7 +139,7 @@ const SiteApplication = () =>{
                     SUMITOMO
                 </Navbar.Brand>
             </Navbar>
-        <Container style={{marginTop:60}}>
+        <Container style={{marginTop:60,width:"80%"}}>
               <Row  >
                  
                     <Form.Group style={{marginRight:5}} controlId="exampleForm.ControlSelect1">
@@ -168,47 +168,43 @@ const SiteApplication = () =>{
                         <option>Name 5</option>
                         </Form.Control>
                         </Col>
-                    </Form.Group>
-                   
-
+                    </Form.Group>           
               </Row>
-
                             <Card>
                                 <Row style={{margin:5}}>
                                         <Col>
 
                                         </Col>
                                         <Col  >
-                                        <h5>Date</h5>
+                                        <b>Date</b>
                                         </Col>
                                         <Col  >
-                                        <h5>Time</h5>
+                                        <b>Time</b>
                                         </Col>
                                         <Col>
-                                        <h5>Data-1</h5>
+                                        <b>Data-1</b>
                                         </Col>
                                         <Col >
-                                        <h5>  Data-2</h5>
+                                        <b>  Data-2</b>
                                         </Col>
                                         <Col >
-                                        <h5>Data-3</h5>
+                                        <b>Data-3</b>
                                         </Col>
                                         <Col>
-                                        <h5>Data-4</h5>
+                                        <b>Data-4</b>
                                         </Col>
                                         <Col>
                                         </Col>
                                 </Row>
 
-                                <Row>
-                                    
+                                <Row className="justify-content-md-center">
+                                
                                     <Col>
-                                    <Form>
-                                    <Form.Group>
-                        {dataCount.map((count ,index , arr)  => (
+                                  
+                              {dataCount.map((count ,index , arr)  => (
                                 <Row style={{margin:5}} key={count.id} >
-                                        <Col >
-                                            { arr.length -1 === index ? <Button onClick={onAddClickHandler} variant="primary">+</Button>   : <Col></Col> }
+                                        <Col style={{padding:4}} >
+                                            { arr.length -1 === index ? <Button  size="sm" onClick={onAddClickHandler} variant="primary">+</Button>   :null }
                                         </Col>
                                         <Col>
                                                 <NumPad.Calendar
@@ -218,7 +214,7 @@ const SiteApplication = () =>{
                                                     markers={['01.03.2018', '06.03.2018']}
                                                     value={count.date}>
                                                    
-                                                    <Form.Control style={{  width:120}}  value={count.date}  placeholder="DATE"  />
+                                                    <Form.Control  size="sm" style={{  width:120}}  value={count.date}  placeholder="DATE"  />
                                                     
                                                 </NumPad.Calendar>
                                         </Col>
@@ -232,7 +228,7 @@ const SiteApplication = () =>{
                                                 placeholder={'Time'}
                                                 value={count.time}>
                                                 
-                                                        <Form.Control style={{ width:100}}  value={count.time}  placeholder="TIME"  />
+                                                        <Form.Control  size="sm" style={{ width:100}}  value={count.time}  placeholder="TIME"  />
                                                    
                                             </NumPad.DateTime>
 
@@ -246,7 +242,7 @@ const SiteApplication = () =>{
                                                         value={count.dataOne}
                                                         decimal={3}>
                                                        
-                                                             <Form.Control style={{width:100}}  value={count.dataOne}  placeholder="DATA 1"  />
+                                                             <Form.Control size="sm" style={{width:100}}  value={count.dataOne}  placeholder="DATA 1"  />
                                                     
                                                 </NumPad.Number>
 
@@ -260,7 +256,7 @@ const SiteApplication = () =>{
                                                                 value={count.dataTwo}
                                                                 decimal={3}>
                                                             
-                                                                <Form.Control style={{width:100}}  value={count.dataTwo}  placeholder="DATA 2"  />
+                                                                <Form.Control  size="sm" style={{width:100}}  value={count.dataTwo}  placeholder="DATA 2"  />
                                                            
                                                         </NumPad.Number>
                                             </Col>
@@ -273,7 +269,7 @@ const SiteApplication = () =>{
                                                         value={count.dataThree}
                                                         decimal={3}>
                                                        
-                                                            <Form.Control style={{width:100}}  value={count.dataThree}  placeholder="DATA 3"  />
+                                                            <Form.Control size="sm" style={{width:100}}  value={count.dataThree}  placeholder="DATA 3"  />
                                                         
                                                 </NumPad.Number>
                                             </Col>
@@ -285,7 +281,7 @@ const SiteApplication = () =>{
                                                             value={count.dataFour}
                                                             decimal={3}>
                                                        
-                                                            <Form.Control style={{width:100}}  value={count.dataFour}  placeholder="DATA 4"  />
+                                                            <Form.Control  size="sm" style={{width:100}}  value={count.dataFour}  placeholder="DATA 4"  />
                                                        
                                                 </NumPad.Number>
                                             </Col>
@@ -293,16 +289,14 @@ const SiteApplication = () =>{
 
                                             <Col >
                                                 
-                                                      { arr.length -1 !== 0 ?  <Button onClick={ ()=> onDelete(count.id)}  variant="danger">-</Button>  : <Col>
-                                            </Col>}
+                                                      { arr.length -1 !== 0 ?  <Button size="sm" onClick={ ()=> onDelete(count.id)}  variant="danger">-</Button>  :null}
                                                
                                             </Col>
 
                                 </Row>
 
                              ))}
-                             </Form.Group>
-                              </Form>
+                          
                                </Col>
                               
                              </Row>
