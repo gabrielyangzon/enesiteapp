@@ -142,13 +142,13 @@ const SiteApplication = () =>{
         <Container style={{marginTop:60,width:"80%"}}>
               <Row  >
                  
-                    <Form.Group style={{marginRight:5}} controlId="exampleForm.ControlSelect1">
+                    <Form.Group  style={{marginRight:5 }} controlId="exampleForm.ControlSelect1">
 
                         <Col>
                         <Form.Label>Select Tag</Form.Label>
                         </Col>
                         <Col>
-                            <Form.Control as="select">
+                            <Form.Control size="sm" as="select">
                             {tagData.map(x => (<option key={x.tagname}>{x.tagname}</option> ))}
                         </Form.Control>
                         </Col>
@@ -160,7 +160,7 @@ const SiteApplication = () =>{
                              <Form.Label>Select Name</Form.Label>
                         </Col>
                         <Col>
-                        <Form.Control as="select">
+                        <Form.Control size="sm" as="select">
                         <option>Name 1</option>
                         <option>Name 2</option>
                         <option>Name 3</option>
@@ -171,7 +171,7 @@ const SiteApplication = () =>{
                     </Form.Group>           
               </Row>
                             <Card>
-                                <Row style={{margin:5}}>
+                                <Row style={{marginBottom:5}}>
                                         <Col>
 
                                         </Col>
@@ -202,7 +202,7 @@ const SiteApplication = () =>{
                                     <Col>
                                   
                               {dataCount.map((count ,index , arr)  => (
-                                <Row style={{margin:5}} key={count.id} >
+                                <Row style={{marginBottom:5}} key={count.id} >
                                         <Col style={{padding:4}} >
                                             { arr.length -1 === index ? <Button  size="sm" onClick={onAddClickHandler} variant="primary">+</Button>   :null }
                                         </Col>
@@ -214,7 +214,7 @@ const SiteApplication = () =>{
                                                     markers={['01.03.2018', '06.03.2018']}
                                                     value={count.date}>
                                                    
-                                                    <Form.Control  size="sm" style={{  width:120}}  value={count.date}  placeholder="DATE"  />
+                                                    <Form.Control  size="sm" style={{  width:90}}  value={count.date}  placeholder="DATE"  />
                                                     
                                                 </NumPad.Calendar>
                                         </Col>
@@ -228,7 +228,7 @@ const SiteApplication = () =>{
                                                 placeholder={'Time'}
                                                 value={count.time}>
                                                 
-                                                        <Form.Control  size="sm" style={{ width:100}}  value={count.time}  placeholder="TIME"  />
+                                                        <Form.Control  size="sm" style={{  width:70}}  value={count.time}  placeholder="TIME"  />
                                                    
                                             </NumPad.DateTime>
 
@@ -242,7 +242,7 @@ const SiteApplication = () =>{
                                                         value={count.dataOne}
                                                         decimal={3}>
                                                        
-                                                             <Form.Control size="sm" style={{width:100}}  value={count.dataOne}  placeholder="DATA 1"  />
+                                                             <Form.Control size="sm"   value={count.dataOne}  placeholder="Data 1"  />
                                                     
                                                 </NumPad.Number>
 
@@ -256,7 +256,7 @@ const SiteApplication = () =>{
                                                                 value={count.dataTwo}
                                                                 decimal={3}>
                                                             
-                                                                <Form.Control  size="sm" style={{width:100}}  value={count.dataTwo}  placeholder="DATA 2"  />
+                                                                <Form.Control  size="sm"  value={count.dataTwo}  placeholder="Data 2"  />
                                                            
                                                         </NumPad.Number>
                                             </Col>
@@ -269,7 +269,7 @@ const SiteApplication = () =>{
                                                         value={count.dataThree}
                                                         decimal={3}>
                                                        
-                                                            <Form.Control size="sm" style={{width:100}}  value={count.dataThree}  placeholder="DATA 3"  />
+                                                            <Form.Control size="sm"   value={count.dataThree}  placeholder="Data 3"  />
                                                         
                                                 </NumPad.Number>
                                             </Col>
@@ -281,7 +281,7 @@ const SiteApplication = () =>{
                                                             value={count.dataFour}
                                                             decimal={3}>
                                                        
-                                                            <Form.Control  size="sm" style={{width:100}}  value={count.dataFour}  placeholder="DATA 4"  />
+                                                            <Form.Control  size="sm"  value={count.dataFour}  placeholder="Data 4"  />
                                                        
                                                 </NumPad.Number>
                                             </Col>
