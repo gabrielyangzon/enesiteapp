@@ -172,7 +172,7 @@ const SiteApplication = () =>{
               </Row>
                             <Card>
                                 <Row  className="justify-content-md-center" style={{marginBottom:5}}>
-                                        <Col>
+                                        <Col xs={1}>
                                         </Col>
                                         <Col  >
                                         <b>Date</b>
@@ -202,7 +202,7 @@ const SiteApplication = () =>{
                                   
                               {dataCount.map((count ,index , arr)  => (
                                 <Row style={{marginBottom:5}} key={count.id} >
-                                        <Col style={{padding:4}} >
+                                        <Col xs={1} style={{padding:4}} >
                                             { arr.length -1 === index ? <Button  size="sm" onClick={onAddClickHandler} variant="primary">+</Button>   :null }
                                         </Col>
                                         <Col>
@@ -213,7 +213,8 @@ const SiteApplication = () =>{
                                                     markers={['01.03.2018', '06.03.2018']}
                                                     value={count.date}>
                                                    
-                                                    <Form.Control  size="sm"    value={count.date}  placeholder="DATE"  />
+                                                    <Form.Control  size="sm"    value={count.date}  placeholder="DATE" 
+                                                   />
                                                     
                                                 </NumPad.Calendar>
                                         </Col>
