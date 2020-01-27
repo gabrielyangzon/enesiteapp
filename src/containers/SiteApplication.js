@@ -171,9 +171,8 @@ const SiteApplication = () =>{
                     </Form.Group>           
               </Row>
                             <Card>
-                                <Row style={{marginBottom:5}}>
+                                <Row  className="justify-content-md-center" style={{marginBottom:5}}>
                                         <Col>
-
                                         </Col>
                                         <Col  >
                                         <b>Date</b>
@@ -214,7 +213,7 @@ const SiteApplication = () =>{
                                                     markers={['01.03.2018', '06.03.2018']}
                                                     value={count.date}>
                                                    
-                                                    <Form.Control  size="sm" style={{  width:90}}  value={count.date}  placeholder="DATE"  />
+                                                    <Form.Control  size="sm"    value={count.date}  placeholder="DATE"  />
                                                     
                                                 </NumPad.Calendar>
                                         </Col>
@@ -228,7 +227,7 @@ const SiteApplication = () =>{
                                                 placeholder={'Time'}
                                                 value={count.time}>
                                                 
-                                                        <Form.Control  size="sm" style={{  width:70}}  value={count.time}  placeholder="TIME"  />
+                                                        <Form.Control  size="sm"   value={count.time}  placeholder="TIME"  />
                                                    
                                             </NumPad.DateTime>
 
