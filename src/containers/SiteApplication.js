@@ -139,7 +139,7 @@ const SiteApplication = () =>{
                     SUMITOMO
                 </Navbar.Brand>
             </Navbar>
-        <Container style={{marginTop:60,width:"80%"}}>
+        <Container  style={{marginTop:60}}>
               <Row  >
                  
                     <Form.Group  style={{marginRight:5 }} controlId="exampleForm.ControlSelect1">
