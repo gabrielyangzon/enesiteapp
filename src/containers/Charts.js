@@ -1,23 +1,7 @@
 import React from 'react'
-
-
 import ReactApexChart from "react-apexcharts";
 
-
-
-
-
-
-
-
 const Charts = (props) => {
-
-
-    const chartY = props.data.map(y => y.time)
-    console.log(chartY)
-
-
-
 
     const chartSettings = {
 
@@ -27,9 +11,8 @@ const Charts = (props) => {
                  data: props.data.map(d=>d.dataOne )
             },
             {
-
                 name:"Data-2",
-                 data: props.data.map(d=>d.dataTwo )
+                data: props.data.map(d=>d.dataTwo )
             },
             {
                 name:"Data-3",
@@ -42,9 +25,7 @@ const Charts = (props) => {
         ],
                 options: {
                     chart: {
-                    type: 'bar',
-                    height: 430,
-
+                    type: 'bar' 
                     },
                     plotOptions: {
                     bar: {
@@ -96,11 +77,12 @@ const Charts = (props) => {
 
     return(
         <React.Fragment>
-
-
-
-            <ReactApexChart options={chartSettings.options} series={chartSettings.temperature} type="bar" height={430} />
-
+            <ReactApexChart 
+              options={chartSettings.options}
+              series={chartSettings.temperature}
+              type="bar" 
+              height={500} 
+              width={600} />
         </React.Fragment>
     )
 }

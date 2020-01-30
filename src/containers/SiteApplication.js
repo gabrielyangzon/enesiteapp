@@ -168,7 +168,15 @@ const SiteApplication = () =>{
                         <option>Name 5</option>
                         </Form.Control>
                         </Col>
-                    </Form.Group>           
+                    </Form.Group>    
+
+                    
+                       
+                        {/* <Col>
+                        <Button size="sm" variant="secondary">SAVE</Button>
+                       
+                        </Col> */}
+                         
               </Row>
                             <Card>
                                 <Row  className="justify-content-md-center" style={{marginBottom:5}}>
