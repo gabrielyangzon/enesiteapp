@@ -1,8 +1,7 @@
 import React ,{useState, useEffect  } from 'react'
-import {Container,Form , Row , Col , Button , Card , Navbar , Modal} from 'react-bootstrap'
-
-
+import {Container,Form , Row , Col , Button , Card , Modal} from 'react-bootstrap'
 import Charts from './Charts'
+import ManageData from '../components/ManageData'
 
 import NumPad from 'react-numpad';
 import './SiteApplication.css'
@@ -17,7 +16,7 @@ const SiteApplication = () =>{
     const [selectedId , setSelectedId] = useState();
     const [selectedData , setSelectedData] = useState();
 
-   const tagData = [
+   const [tagData , setTagData] =useState([
        {
           tagname : '21P01-A',
           nameList:['A-工水受入ポンプ' , 'test1-21P01-A' , 'test2-21P01-A' ]
@@ -26,19 +25,19 @@ const SiteApplication = () =>{
         tagname : '21P01-B',
         nameList:['B-工水受入ポンプ' , 'test1-21P01-B' , 'test2-21P01-B']
        },
-       {
-        tagname : '21P02-A',
-        nameList:['A-工水補給水ポンプ' , 'test1-21P02' , 'test2-21P02'  ]
-       },
-       {
-        tagname : '21P02-B',
-        nameList:['B-工水補給水ポンプ' , 'test1-21P02-B' , 'test2-21P02-B' ]
-       },
-       {
-        tagname : '21P03',
-        nameList:['散水ポンプ' , 'test1-21P03' , 'test2-21P03']
-       },
-]
+    //    {
+    //     tagname : '21P02-A',
+    //     nameList:['A-工水補給水ポンプ' , 'test1-21P02' , 'test2-21P02'  ]
+    //    },
+    //    {
+    //     tagname : '21P02-B',
+    //     nameList:['B-工水補給水ポンプ' , 'test1-21P02-B' , 'test2-21P02-B' ]
+    //    },
+    //    {
+    //     tagname : '21P03',
+    //     nameList:['散水ポンプ' , 'test1-21P03' , 'test2-21P03']
+    //    },
+])
 
    const [dataCount,setDataCount ] = useState([{
         id:1,
@@ -68,6 +67,8 @@ const SiteApplication = () =>{
     }
 
     const [modalShow, setModalShow] = React.useState(false);
+
+    const [modalAddTagShow, setModalAddTagShow] = useState(false);
 
     const onAddClickHandler = (idData) =>
         {
@@ -132,13 +133,20 @@ const SiteApplication = () =>{
        
     }
 
+
+   const onAddTagSelectedHandler = () =>{
+     setModalAddTagShow(true);
+   }
+
+   const onAddTagnameButtonHandler = (name) => {
+       
+       setTagData([...tagData , {tagname: name , nameList:[] }] )
+
+       setModalAddTagShow(false)
+   }
+
     return(
-        <React.Fragment>
-            <Navbar className="justify-content-xs-center" fixed="top"  bg="primary" variant="dark">
-                <Navbar.Brand >   
-                    SUMITOMO
-                </Navbar.Brand>
-            </Navbar>
+        <React.Fragment> 
         <Container  style={{marginTop:60}}>
               <Row  >
                  
@@ -150,6 +158,7 @@ const SiteApplication = () =>{
                         <Col>
                             <Form.Control size="sm" as="select">
                             {tagData.map(x => (<option key={x.tagname}>{x.tagname}</option> ))}
+                            <option key={"add"} onClick={onAddTagSelectedHandler} >+ ADD TAG</option>
                         </Form.Control>
                         </Col>
                     </Form.Group>
@@ -171,11 +180,7 @@ const SiteApplication = () =>{
                     </Form.Group>    
 
                     
-                       
-                        {/* <Col>
-                        <Button size="sm" variant="secondary">SAVE</Button>
-                       
-                        </Col> */}
+                    
                          
               </Row>
                             <Card>
@@ -316,12 +321,19 @@ const SiteApplication = () =>{
               </Row>
               </Container>
 
-              <MyVerticallyCenteredModal
+              <DeleteModal
                     dataToBeDeleted={selectedData }
                     show={modalShow}
                     onYes={modalYesClickHandler}
                     onNo={modalNoClickHandler}
-/>
+             />
+
+             <ManageData
+                show={modalAddTagShow}
+                onHide={()=>setModalAddTagShow(false)}
+                onAdd={onAddTagnameButtonHandler}
+                tagList={tagData}
+            />
     </React.Fragment>
 
 
@@ -331,7 +343,9 @@ const SiteApplication = () =>{
 
 
 
-function MyVerticallyCenteredModal(props) {
+
+
+function DeleteModal(props) {
     return (
       <Modal
       {...props}
